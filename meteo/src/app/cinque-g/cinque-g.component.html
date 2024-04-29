@@ -1,0 +1,36 @@
+<div class="container text-center mt-5">
+    <h1 class="display-4">Ricerca della città</h1>
+  
+    <div class="input-group mt-3">
+        <input type="text" #newquery class="form-control" placeholder="Inserisci il nome della città">
+        <div class="input-group-append">
+            <button (click)="submit(newquery)" class="btn btn-dark">Cerca</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="results" class="container mt-5">
+    <h2 class="text-center mb-4">Informazioni sul meteo di {{ results.city.name }}</h2>
+    <div class="row">
+        <div class="col-md-6 mx-auto mb-4">
+            <div class="card text-center position-relative">
+                <div class="card-body">
+                    <h5 class="card-title">{{ results.list[selectedIndex].dt_txt | date:'EEE, d MMM' }}</h5>
+                    <img src="http://openweathermap.org/img/wn/{{ results.list[selectedIndex].weather[0].icon }}@4x.png" alt="Icona meteo" class="img-fluid mt-3" style="width: 100px; height: 100px;">
+                    <p class="card-text">{{ results.list[selectedIndex].weather[0].description }}</p>
+                    <p class="card-text">Tempo: {{ results.list[selectedIndex].main.temp }} °C</p>
+                    <p class="card-text">Temperatura min: {{ results.list[selectedIndex].main.temp_min }} °C</p>
+                    <p class="card-text">Temperatura max: {{ results.list[selectedIndex].main.temp_max }} °C</p>
+                    <p class="card-text">Percepita: {{ results.list[selectedIndex].main.feels_like }} °C</p>
+                    <p class="card-text">Nuvolosità: {{ results.list[selectedIndex].clouds.all }}%</p>
+                    <p class="card-text">Velocità vento: {{ results.list[selectedIndex].wind.speed }} m/s</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center position-absolute w-100" style="bottom: 30px;">
+                    <button class="btn btn-dark mr-2 arrow-btn" (click)="prevItem()">↑</button>
+                    <button class="btn btn-dark arrow-btn" (click)="nextItem()">↓</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
